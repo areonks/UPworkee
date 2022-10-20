@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CanCreateJobVacancy;
+use App\Http\Middleware\CanCreateVacancyResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,6 +45,12 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'canCreateVacancy'=>[
+            CanCreateJobVacancy::class,
+        ],
+        'canCreateResponse'=>[
+            CanCreateVacancyResponse::class,
+        ]
     ];
 
     /**

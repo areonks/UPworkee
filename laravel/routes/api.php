@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::get('/likedVacancies', [JobVacancyController::class, 'likedVacancies']);
 
     Route::group(['prefix' => 'vacancies'], function () {
-        Route::post('', [JobVacancyController::class, 'store']);
+        Route::post('', [JobVacancyController::class, 'store'])->middleware('canCreateVacancy');
         Route::put('/{jobVacancy}', [JobVacancyController::class, 'update'])->middleware('can:update,jobVacancy');
         Route::delete('/{jobVacancy}', [JobVacancyController::class, 'destroy'])->middleware('can:destroy,jobVacancy');
         Route::post('/{jobVacancy}/like', [JobVacancyController::class, 'addLike']);
@@ -44,7 +44,7 @@ Route::middleware('auth:sanctum')->group( function () {
 
         Route::group(['prefix' => '/{jobVacancy}/responses'], function () {
             Route::get('', [VacancyResponseController::class, 'index']);
-            Route::post('', [VacancyResponseController::class, 'store']);
+            Route::post('', [VacancyResponseController::class, 'store'])->middleware('canCreateResponse');
         });
 
     });

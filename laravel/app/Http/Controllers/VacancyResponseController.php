@@ -8,7 +8,6 @@ use App\Http\Resources\VacancyResponseResource;
 use App\Models\VacancyResponse;
 use App\Models\JobVacancy;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class VacancyResponseController extends Controller
 
@@ -20,7 +19,10 @@ class VacancyResponseController extends Controller
 
     public function store(StoreVacancyResponseRequest $request, JobVacancy $jobVacancy)
     {
-        return Auth::user()->makeResponse($request->validated(), $jobVacancy);
+        $validatedRequest = $request->validated();
+        $vacancyResponse = $request->user()->vacancyResponses()->make($validatedRequest);
+        $vacancyResponse = $jobVacancy->vacancyResponses()->save($vacancyResponse);
+        return new VacancyResponseResource($vacancyResponse);
     }
 
     public function update(UpdateVacancyResponseRequest $request, VacancyResponse $vacancyResponse)
