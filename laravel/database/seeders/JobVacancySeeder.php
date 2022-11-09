@@ -18,7 +18,7 @@ class JobVacancySeeder extends Seeder
         $user = User::all();
         $user->each(function ($user) {
             $user->jobVacancies()->saveMany(
-                JobVacancy::factory()->count(rand(0, 2))->for($user)->create()
+                JobVacancy::factory()->count(rand(1, 2))->for($user)->create()
             );
         });
         JobVacancy::all()->each(function ($jobVacancy) use ($user) {

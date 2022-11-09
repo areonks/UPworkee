@@ -6,7 +6,8 @@ class VacancyResponseObserver
 {
     public function created()
     {
-        auth()->user()->decrement('coins');
-
+        if (auth()->user()) {
+            auth()->user()->decrement('coins');
+        }
     }
 }

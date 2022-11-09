@@ -34,6 +34,8 @@ Route::middleware('auth:sanctum')->group( function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/likedUsersVacancies', [JobVacancyController::class, 'likedUsersVacancies']);
     Route::get('/likedVacancies', [JobVacancyController::class, 'likedVacancies']);
+    Route::post('users/{user}/like', [AuthController::class, 'addLike']);
+    Route::post('users/{user}/unlike', [AuthController::class, 'removeLike']);
 
     Route::group(['prefix' => 'vacancies'], function () {
         Route::post('', [JobVacancyController::class, 'store'])->middleware('canCreateVacancy');

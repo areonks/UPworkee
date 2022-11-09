@@ -37,4 +37,15 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response()->noContent();
     }
+    public function addLike(User $user, Request $request)
+    {
+        $user->addLike($request->user()->id);
+        return response()->noContent();
+    }
+
+    public function removeLike(User $user, Request $request)
+    {
+        $user->removeLike($request->user()->id);
+        return response()->noContent();
+    }
 }
