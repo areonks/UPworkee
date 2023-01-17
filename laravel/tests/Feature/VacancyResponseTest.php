@@ -19,13 +19,8 @@ class VacancyResponseTest extends TestCase
 
         $user = User::all()->last();
         $response = $this->actingAs($user)
-            ->post('api/vacancies', [
-                "title" => "title",
+            ->post('api/vacancies/1/responses', [
                 "description" => "description",
-                "tags" => [
-                    "tags1",
-                    "tags2"
-                ]
             ]);
 
         $response->assertStatus(201)->assertJsonFragment([
@@ -43,7 +38,7 @@ class VacancyResponseTest extends TestCase
 
     }
 
-    public function test_update_vacancy()
+    public function test_update_response()
     {
 
         $user = User::all()->last();
